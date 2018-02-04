@@ -35,8 +35,8 @@ public class DAOBebedor {
 	/**
 	 * Constante para indicar el usuario Oracle del estudiante
 	 */
-	//TODO Requerimiento 1H: Modifique la constante, reemplazando al ususario PARRANDEROS por su ususario de Oracle
-	public final static String USUARIO = "PARRANDEROS";
+	//Requerimiento 1H: Modifique la constante, reemplazando al ususario PARRANDEROS por su ususario de Oracle
+	public final static String USUARIO = "ISIS2304A1001810";
 	
 	
 	//----------------------------------------------------------------------------------------------------------------------------------
@@ -267,12 +267,14 @@ public class DAOBebedor {
 	 * @throws SQLException Si existe algun problema al extraer la informacion del ResultSet.
 	 */
 	public Bebedor convertResultSetToBebedor(ResultSet resultSet) throws SQLException {
-		//TODO Requerimiento 1G: Complete el metodo con los atributos agregados previamente en la clase Bebedor. 
+		//Requerimiento 1G: Complete el metodo con los atributos agregados previamente en la clase Bebedor. 
 		//						 Tenga en cuenta los nombres de las columnas de la Tabla en la Base de Datos (ID, NOMBRE, PRESUPUESTO, CIUDAD)
 
 		
 		String presupuesto = resultSet.getString("PRESUPUESTO");
 		String ciudad = resultSet.getString("CIUDAD");
+		String nombre = resultSet.getString("NOMBRE");
+		long id = resultSet.getLong("ID");
 
 		Bebedor beb = new Bebedor(id, nombre, presupuesto, ciudad);
 
