@@ -127,20 +127,20 @@ public class BebedoresService {
 	 * @return	<b>Response Status 200</b> - JSONs que contienen a los bebedores que tengan el nombre o el apellido correspondiente<br/>
 	 * 			<b>Response Status 500</b> - Excepcion durante el transcurso de la transaccion
 	 */
-	//TODO Requerimiento 2A: Identifique e implemente la anotacion correcta para la realizacion del metodo
-
+	//Requerimiento 2A: Identifique e implemente la anotacion correcta para la realizacion del metodo
+	@GET
 	@Path( "/filterBy" )
-	//TODO Requerimiento 2B: Identifique e implemente las anotaciones que indican el tipo de contenido que produce y/o consume el metodo 
-
-	//TODO Requerimiento 2C: Complete la signatura del metodo (parametros) a partir de la documentacion dada.
-	public Response getBebedoresByCiudadAndPresupuesto(@QueryParam("ciudad")String ciudad){
+	//Requerimiento 2B: Identifique e implemente las anotaciones que indican el tipo de contenido que produce y/o consume el metodo 
+	@Produces({MediaType.APPLICATION_JSON})
+	//Requerimiento 2C: Complete la signatura del metodo (parametros) a partir de la documentacion dada.
+	public Response getBebedoresByCiudadAndPresupuesto(@QueryParam("presupuesto") String presupuesto, @QueryParam("ciudad")String ciudad){
 		
 		try{
 			ParranderosTransactionManager tm = new ParranderosTransactionManager( getPath( ) );
 			List<Bebedor>bebedores;
 			
-			//TODO Requerimiento 2D: Llame al metodo del ParranderosTransactionManager que retorne el resultado esperado a partir de los criterios establecidos
-
+			//Requerimiento 2D: Llame al metodo del ParranderosTransactionManager que retorne el resultado esperado a partir de los criterios establecidos
+			tm.getBebedoresByCiudadAndPresupuesto(ciudad, presupuesto);
 			bebedores = null;
 			return Response.status( 200 ).entity( bebedores ).build( );			
 		}
