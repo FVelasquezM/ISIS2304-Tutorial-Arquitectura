@@ -141,8 +141,8 @@ public class BebedoresService {
 			List<Bebedor>bebedores;
 
 			//Requerimiento 2D: Llame al metodo del ParranderosTransactionManager que retorne el resultado esperado a partir de los criterios establecidos
-			tm.getBebedoresByCiudadAndPresupuesto(ciudad, presupuesto);
-			bebedores = null;
+			
+			bebedores = tm.getBebedoresByCiudadAndPresupuesto(ciudad, presupuesto);
 			return Response.status( 200 ).entity( bebedores ).build( );			
 		}
 		catch( Exception e )
@@ -249,14 +249,22 @@ public class BebedoresService {
 	 * @return	<b>Response Status 200</b> - JSON que contiene al bebedor que se desea eliminar <br/>
 	 * 			<b>Response Status 500</b> - Excepcion durante el transcurso de la transaccion
 	 */
-	//TODO Requerimiento 6A: Identifique e implemente la anotacion correcta para la realizacion del metodo
-
-	//TODO Requerimiento 6B: Identifique e implemente las anotaciones que indican el tipo de contenido que produce Y consume el metodo 
-
+	//Requerimiento 6A: Identifique e implemente la anotacion correcta para la realizacion del metodo
+	@DELETE
+	//Requerimiento 6B: Identifique e implemente las anotaciones que indican el tipo de contenido que produce Y consume el metodo 
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 
 	public Response deleteBebedor(Bebedor bebedor) {
-		//TODO Requerimiento 6C: Implemente el metodo a partir de los ejemplos anteriores y utilizando el Transaction Manager de Parranderos 
-		return null;
+		//Requerimiento 6C: Implemente el metodo a partir de los ejemplos anteriores y utilizando el Transaction Manager de Parranderos 
+		try{
+			ParranderosTransactionManager tm = new ParranderosTransactionManager(getPath());
+			tm.deleteBebedor(bebedor);
+			return Response.status(200).entity(bebedor).build();
+		}
+		catch(Exception e) {
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
 	}
 
 }

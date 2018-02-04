@@ -434,10 +434,11 @@ public class ParranderosTransactionManager {
 		{
 			this.conn = darConexion();
 			daoBebedor.setConn( conn );
-			//TODO Requerimiento 6D: Utilizando los Metodos de DaoBebedor, verifique que exista el bebedor con el ID dado en el parametro. 
+			//Requerimiento 6D: Utilizando los Metodos de DaoBebedor, verifique que exista el bebedor con el ID dado en el parametro. 
 			//						 Si no existe un bebedor con el ID ingresado, lance una excepcion en donde se explique lo sucedido
 			//						 De lo contrario, se elimina la informacion del bebedor de la Base de Datos
-
+			if(daoBebedor.findBebedorById(bebedor.getId()) == null) throw new Exception("El bebedor dado por parámetro no existe");
+			else daoBebedor.deleteBebedor(bebedor);
 
 		}
 		catch (SQLException sqlException) {
