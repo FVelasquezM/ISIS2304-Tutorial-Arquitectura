@@ -219,14 +219,25 @@ public class BebedoresService {
 	 * @return	<b>Response Status 200</b> - JSON que contiene al bebedor que se desea modificar <br/>
 	 * 			<b>Response Status 500</b> - Excepcion durante el transcurso de la transaccion
 	 */
-	//TODO Requerimiento 5A: Identifique e implemente la anotacion correcta para la realizacion del metodo
-
-	//TODO Requerimiento 5B: Identifique e implemente las anotaciones que indican el tipo de contenido que produce Y consume el metodo 
-
+	//Requerimiento 5A: Identifique e implemente la anotacion correcta para la realizacion del metodo
+	@POST
+	// Requerimiento 5B: Identifique e implemente las anotaciones que indican el tipo de contenido que produce Y consume el metodo 
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 
 	public Response updateBebedor(Bebedor bebedor) {
-		//TODO Requerimiento 5B: Implemente el metodo a partir de los ejemplos anteriores y utilizando el Transaction Manager de Parranderos 
-		return null;
+		
+		//Requerimiento 5B: Implemente el metodo a partir de los ejemplos anteriores y utilizando el Transaction Manager de Parranderos 
+		
+		try{
+			ParranderosTransactionManager tm = new ParranderosTransactionManager(getPath());
+			tm.updateBebedor(bebedor);
+			return Response.status(200).entity(bebedor).build();
+		}
+		catch(Exception e)
+		{
+			return Response.status(500).entity(doErrorMessage(e)).build();
+		}
 	}
 
 	/**
