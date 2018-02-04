@@ -290,10 +290,11 @@ public class ParranderosTransactionManager {
 		DAOBebedor daoBebedor = new DAOBebedor( );
 		try
 		{
-			//TODO Requerimiento 3D: Obtenga la conexion a la Base de Datos (revise los metodos de la clase)
-
-			//TODO Requerimiento 3E: Establezca la conexion en el objeto DAOBebedor (revise los metodos de la clase DAOBebedor)
-
+			//Requerimiento 3D: Obtenga la conexion a la Base de Datos (revise los metodos de la clase)
+			this.conn = darConexion();
+			
+			//Requerimiento 3E: Establezca la conexion en el objeto DAOBebedor (revise los metodos de la clase DAOBebedor)
+			daoBebedor.setConn(conn);
 			daoBebedor.addBebedor(bebedor);
 
 		}
