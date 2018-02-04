@@ -197,15 +197,15 @@ public class BebedoresService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addBebedorWithLimitations(Bebedor bebedor) {
 
-		//TODO Requerimiento 4A: Implemente el metodo a partir de los ejemplos anteriores y utilizando el Transaction Manager de Parranderos 
+		//Requerimiento 4A: Implemente el metodo a partir de los ejemplos anteriores y utilizando el Transaction Manager de Parranderos 
 		try {
 			ParranderosTransactionManager tm = new ParranderosTransactionManager(getPath());
 			tm.addBebedorWithLimitations(bebedor);
 			
-			return null;
+			return Response.status(200).entity(bebedor).build();
 		}
 		catch(Exception e) {
-			return null;
+			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
 	}
 

@@ -336,15 +336,17 @@ public class ParranderosTransactionManager {
 		DAOBebedor daoBebedor = new DAOBebedor( );
 		try
 		{
-			//TODO Requerimiento 4B: Obtenga la conexion a la Base de Datos (revise los metodos de la clase)
-
-			//TODO Requerimiento 4C: Establezca la conexion del DaoBebedor a la Base de datos (revise los metodos de DAOBebedor)
-		
+			//Requerimiento 4B: Obtenga la conexion a la Base de Datos (revise los metodos de la clase)
+			this.conn = darConexion();
+			//Requerimiento 4C: Establezca la conexion del DaoBebedor a la Base de datos (revise los metodos de DAOBebedor)
+			daoBebedor.setConn(conn);
 			
-			//TODO Requerimiento 4C: Verifique la regla de negocio descrita en la documentacion. En caso que no se cumpla, lance una excepcion explicando lo sucedido
+			//Requerimiento 4C: Verifique la regla de negocio descrita en la documentacion. En caso que no se cumpla, lance una excepcion explicando lo sucedido
 			//						 (Solo se agrega el bebedor si la cantidad de bebedores, en la Base de Datos, de su misma ciudad es inferior al valor de la constante CANTIDAD_MAXIMA.
-			
-			
+			if(daoBebedor.getCountBebedoresByCiudad(bebedor.getNombre().trim()) < CANTIDAD_MAXIMA) {
+				daoBebedor.addBebedor(bebedor);
+			}
+			else throw new Exception("No es posible agregar al bebedor, se superaría el límite máximo de bebedores en su ciudad");
 		}
 		catch (SQLException sqlException) {
 			System.err.println("[EXCEPTION] SQLException:" + sqlException.getMessage());
